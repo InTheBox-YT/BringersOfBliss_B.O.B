@@ -3,10 +3,10 @@ extends CharacterBody3D
 @onready var camera = $Camera3D
 
 const SPEED = 6.0
-const JUMP_VELOCITY = 4.0
+const JUMP_VELOCITY = 5.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = 20.0
+var gravity = 25.0
 
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())

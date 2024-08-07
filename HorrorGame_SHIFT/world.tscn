@@ -1,10 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bh6q4ldxeoao0"]
+[gd_scene load_steps=15 format=3 uid="uid://bh6q4ldxeoao0"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_88d5s"]
-[ext_resource type="Texture2D" uid="uid://bsf5gscpox4jd" path="res://Sky_Day_BlueSky_Equirect.png" id="2_1bgkt"]
+[ext_resource type="Texture2D" uid="uid://bmv2kx5qr3lgf" path="res://Cold Night Equirect.png" id="2_gbh47"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nlqik"]
-panorama = ExtResource("2_1bgkt")
+panorama = ExtResource("2_gbh47")
 
 [sub_resource type="Sky" id="Sky_jllpi"]
 sky_material = SubResource("PanoramaSkyMaterial_nlqik")
@@ -34,9 +34,13 @@ material = SubResource("StandardMaterial3D_pilib")
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_avanm"]
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8q560"]
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_g6hrm"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_8q560"]
+[sub_resource type="BoxMesh" id="BoxMesh_8cwbj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ps1ea"]
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_88d5s")
@@ -111,14 +115,14 @@ light_volumetric_fog_energy = 7.949
 shadow_enabled = true
 
 [node name="Short" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 2.11785, 0, 0, 0, 1, 0, 2.63956, 0)
+transform = Transform3D(1, 0, 0, 0, 2.11785, 0, 0, 0, 1, -9.63764, 2.63956, 0)
 physics_material_override = SubResource("PhysicsMaterial_avanm")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Short"]
-mesh = SubResource("CylinderMesh_g6hrm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Short"]
 shape = SubResource("CylinderShape3D_8q560")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Short"]
+mesh = SubResource("CylinderMesh_g6hrm")
 
 [node name="Tall" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 4.4853, 0, 0, 0, 1, 2.07861, 4.19359, 10.4544)
@@ -129,6 +133,15 @@ mesh = SubResource("CylinderMesh_g6hrm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Tall"]
 shape = SubResource("CylinderShape3D_8q560")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47424, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_8cwbj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_ps1ea")
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
