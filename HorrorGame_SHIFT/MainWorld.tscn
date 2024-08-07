@@ -1,12 +1,23 @@
-[gd_scene load_steps=14 format=3 uid="uid://tfujhehs323i"]
+[gd_scene load_steps=17 format=3 uid="uid://tfujhehs323i"]
 
+[ext_resource type="Texture2D" uid="uid://bv7ptvlhht8qs" path="res://Texture/1_1XbggjOprfuQ5JfBEeR-pQ.png" id="1_wbtjt"]
 [ext_resource type="Script" path="res://Camera3D.gd" id="2_ndsg5"]
 [ext_resource type="Texture2D" uid="uid://c7cwtfoa051aa" path="res://Texture/texture_10.png" id="2_s0ti3"]
 [ext_resource type="Texture2D" uid="uid://dnxcjxlkl6w8n" path="res://Texture/texture_02.png" id="3_yh3hw"]
 
 [sub_resource type="GDScript" id="GDScript_krfce"]
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kmnin"]
+panorama = ExtResource("1_wbtjt")
+
+[sub_resource type="Sky" id="Sky_1grta"]
+sky_material = SubResource("PanoramaSkyMaterial_kmnin")
+process_mode = 1
+radiance_size = 2
+
 [sub_resource type="Environment" id="Environment_ikox7"]
+sky = SubResource("Sky_1grta")
+reflected_light_source = 2
 glow_enabled = true
 fog_enabled = true
 fog_light_color = Color(1, 1, 1, 1)
@@ -40,12 +51,6 @@ fov = 103.937
 script = ExtResource("2_ndsg5")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
-
-[node name="ColorRect" type="ColorRect" parent="Camera3D/CanvasLayer"]
-offset_left = 77.0
-offset_top = -31.0
-offset_right = 1231.0
-offset_bottom = 620.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.790241, 0.0716761, 0.60859, 0.0331286, -0.996681, 0.0743663, 0.611901, -0.0386055, -0.789992, 0, 1.60324, 0)
