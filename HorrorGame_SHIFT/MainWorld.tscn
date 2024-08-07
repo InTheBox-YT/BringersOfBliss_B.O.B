@@ -5,113 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://dnxcjxlkl6w8n" path="res://Texture/texture_02.png" id="3_yh3hw"]
 
 [sub_resource type="GDScript" id="GDScript_krfce"]
-script/source = "extends Node3D
-
-# Adjustable parameters
-@export var max_rooms: int = 10
-@export var min_room_size: Vector3 = Vector3(4, 3, 4)
-@export var max_room_size: Vector3 = Vector3(10, 6, 10)
-@export var hallway_width: float = 2.0
-@export var hallway_height: float = 3.0
-@export var wall_thickness: float = 0.5
-
-# Holds the generated rooms and hallways
-var rooms = []
-var hallways = []
-
-func _ready():
-	generate_dungeon()
-
-func generate_dungeon():
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
-
-	for i in range(max_rooms):
-		var room_size = Vector3(
-			rng.randf_range(min_room_size.x, max_room_size.x),
-			rng.randf_range(min_room_size.y, max_room_size.y),
-			rng.randf_range(min_room_size.z, max_room_size.z)
-		)
-		
-		var room_position = Vector3(
-			rng.randf_range(-50, 50),
-			0,
-			rng.randf_range(-50, 50)
-		)
-		
-		var room = create_room(room_size, room_position)
-		rooms.append(room)
-		
-		if i > 0:
-			var prev_room = rooms[i - 1]
-			var hallway = create_hallway(prev_room.global_transform.origin, room.global_transform.origin)
-			hallways.append(hallway)
-
-func create_room(size: Vector3, position: Vector3) -> Node3D:
-	var room = Node3D.new()
-	var room_size = size
-	var room_center = position
-
-	# Create walls
-	var wall1 = create_wall(Vector3(room_size.x, wall_thickness, room_size.z), room_center + Vector3(-room_size.x / 2, 0, 0), Vector3(0, 0, 1))
-	var wall2 = create_wall(Vector3(room_size.x, wall_thickness, room_size.z), room_center + Vector3(room_size.x / 2, 0, 0), Vector3(0, 0, -1))
-	var wall3 = create_wall(Vector3(wall_thickness, room_size.y, room_size.z), room_center + Vector3(0, 0, -room_size.z / 2), Vector3(1, 0, 0))
-	var wall4 = create_wall(Vector3(wall_thickness, room_size.y, room_size.z), room_center + Vector3(0, 0, room_size.z / 2), Vector3(-1, 0, 0))
-	var floor = create_wall(Vector3(room_size.x, wall_thickness, room_size.z), room_center + Vector3(0, -room_size.y / 2, 0), Vector3(0, 1, 0))
-	var ceiling = create_wall(Vector3(room_size.x, wall_thickness, room_size.z), room_center + Vector3(0, room_size.y / 2, 0), Vector3(0, -1, 0))
-
-	room.add_child(wall1)
-	room.add_child(wall2)
-	room.add_child(wall3)
-	room.add_child(wall4)
-	room.add_child(floor)
-	room.add_child(ceiling)
-
-	room.global_transform.origin = position
-	add_child(room)
-	return room
-
-func create_wall(size: Vector3, position: Vector3, normal: Vector3) -> MeshInstance3D:
-	var wall = MeshInstance3D.new()
-	var mesh = BoxMesh.new()
-	mesh.size = size
-	wall.mesh = mesh
-	wall.global_transform.origin = position
-	wall.look_at(position + normal, Vector3.UP)
-	return wall
-
-func create_hallway(start: Vector3, end: Vector3) -> Node3D:
-	var hallway = Node3D.new()
-	var distance = start.distance_to(end)
-	var center = (start + end) / 2
-
-	var hallway_mesh = BoxMesh.new()
-	hallway_mesh.size = Vector3(hallway_width, hallway_height, distance)
-	
-	var hallway_body = MeshInstance3D.new()
-	hallway_body.mesh = hallway_mesh
-	hallway_body.global_transform.origin = center
-	hallway_body.look_at(end)
-	hallway.add_child(hallway_body)
-	
-	# Create the walls for the hallway
-	var wall1 = create_wall(Vector3(hallway_width, hallway_height, distance), center + Vector3(0, 0, -distance / 2), Vector3(0, 0, 1))
-	var wall2 = create_wall(Vector3(hallway_width, hallway_height, distance), center + Vector3(0, 0, distance / 2), Vector3(0, 0, -1))
-	var wall3 = create_wall(Vector3(distance, hallway_height, hallway_width), center + Vector3(-distance / 2, 0, 0), Vector3(1, 0, 0))
-	var wall4 = create_wall(Vector3(distance, hallway_height, hallway_width), center + Vector3(distance / 2, 0, 0), Vector3(-1, 0, 0))
-	var floor = create_wall(Vector3(distance, wall_thickness, hallway_width), center + Vector3(0, -hallway_height / 2, 0), Vector3(0, 1, 0))
-	var ceiling = create_wall(Vector3(distance, wall_thickness, hallway_width), center + Vector3(0, hallway_height / 2, 0), Vector3(0, -1, 0))
-
-	hallway.add_child(wall1)
-	hallway.add_child(wall2)
-	hallway.add_child(wall3)
-	hallway.add_child(wall4)
-	hallway.add_child(floor)
-	hallway.add_child(ceiling)
-
-	add_child(hallway)
-	return hallway
-"
 
 [sub_resource type="Environment" id="Environment_ikox7"]
 glow_enabled = true
@@ -139,9 +32,6 @@ albedo_texture = ExtResource("3_yh3hw")
 
 [node name="Node3D" type="Node3D"]
 script = SubResource("GDScript_krfce")
-max_rooms = 5
-min_room_size = Vector3(6, 5, 6)
-max_room_size = Vector3(15, 6, 15)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.793438, 0.608651, 0, -0.608651, 0.793438, 0.520804, 6.78256, 11.8181)
