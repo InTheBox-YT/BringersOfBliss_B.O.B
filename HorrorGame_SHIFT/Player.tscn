@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdeij3mxerthy"]
+[gd_scene load_steps=5 format=3 uid="uid://bdeij3mxerthy"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_feayh"]
 
@@ -6,11 +6,24 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wx00x"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_p7tft"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Camera3D:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 2
 script = ExtResource("1_feayh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.999995, 0.0032114, 0, -0.0032114, 0.999995, 0, 0, 0, 1, 0, 0.994259, 0)
+layers = 2
 mesh = SubResource("CapsuleMesh_8pk3e")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -20,3 +33,6 @@ shape = SubResource("CapsuleShape3D_wx00x")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58898, 0)
 fov = 90.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_p7tft")
