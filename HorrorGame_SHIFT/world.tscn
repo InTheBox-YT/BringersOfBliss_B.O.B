@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bh6q4ldxeoao0"]
+[gd_scene load_steps=13 format=3 uid="uid://bh6q4ldxeoao0"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_88d5s"]
 [ext_resource type="Texture2D" uid="uid://bsf5gscpox4jd" path="res://Sky_Day_BlueSky_Equirect.png" id="2_1bgkt"]
@@ -8,11 +8,19 @@ panorama = ExtResource("2_1bgkt")
 
 [sub_resource type="Sky" id="Sky_jllpi"]
 sky_material = SubResource("PanoramaSkyMaterial_nlqik")
+process_mode = 1
+radiance_size = 4
 
 [sub_resource type="Environment" id="Environment_eyq2b"]
 background_mode = 2
 sky = SubResource("Sky_jllpi")
+ambient_light_source = 3
 tonemap_mode = 2
+glow_enabled = true
+glow_normalized = true
+fog_enabled = true
+fog_height = 13.2
+fog_height_density = -0.3368
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_58geg"]
 
@@ -24,6 +32,12 @@ material = SubResource("StandardMaterial3D_pilib")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fqbfa"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_avanm"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_g6hrm"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8q560"]
+
 [node name="World" type="Node3D"]
 script = ExtResource("1_88d5s")
 
@@ -31,7 +45,7 @@ script = ExtResource("1_88d5s")
 environment = SubResource("Environment_eyq2b")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(-0.866024, -0.433016, 0.250001, -0.373298, 0.892583, 0.25287, -0.332643, 0.125667, -0.934642, 0, 7.37572, 0)
 shadow_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -89,6 +103,32 @@ shape = SubResource("BoxShape3D_fqbfa")
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Player.tscn")
 spawn_path = NodePath("..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.24327, 11.4437)
+light_energy = 2.293
+light_volumetric_fog_energy = 7.949
+shadow_enabled = true
+
+[node name="Short" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 2.11785, 0, 0, 0, 1, 0, 2.63956, 0)
+physics_material_override = SubResource("PhysicsMaterial_avanm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Short"]
+mesh = SubResource("CylinderMesh_g6hrm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Short"]
+shape = SubResource("CylinderShape3D_8q560")
+
+[node name="Tall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 4.4853, 0, 0, 0, 1, 2.07861, 4.19359, 10.4544)
+physics_material_override = SubResource("PhysicsMaterial_avanm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tall"]
+mesh = SubResource("CylinderMesh_g6hrm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tall"]
+shape = SubResource("CylinderShape3D_8q560")
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]

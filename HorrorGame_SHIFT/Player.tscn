@@ -1,19 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdeij3mxerthy"]
+[gd_scene load_steps=6 format=3 uid="uid://bdeij3mxerthy"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_feayh"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8pk3e"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wx00x"]
-
-[sub_resource type="Environment" id="Environment_ougpk"]
-background_mode = 2
-glow_enabled = true
-fog_enabled = true
-fog_light_color = Color(0.681551, 0.710747, 0.756622, 1)
-volumetric_fog_enabled = true
-adjustment_enabled = true
-adjustment_brightness = 1.25
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_uaa16"]
 
@@ -43,7 +34,6 @@ shape = SubResource("CapsuleShape3D_wx00x")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58898, 0)
-environment = SubResource("Environment_ougpk")
 attributes = SubResource("CameraAttributesPractical_uaa16")
 fov = 90.0
 
