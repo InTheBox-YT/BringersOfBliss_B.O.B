@@ -1,15 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://bh6q4ldxeoao0"]
+[gd_scene load_steps=10 format=3 uid="uid://bh6q4ldxeoao0"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_88d5s"]
+[ext_resource type="Texture2D" uid="uid://bsf5gscpox4jd" path="res://Sky_Day_BlueSky_Equirect.png" id="2_1bgkt"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nlqik"]
+panorama = ExtResource("2_1bgkt")
+
+[sub_resource type="Sky" id="Sky_jllpi"]
+sky_material = SubResource("PanoramaSkyMaterial_nlqik")
+
+[sub_resource type="Environment" id="Environment_eyq2b"]
+background_mode = 2
+sky = SubResource("Sky_jllpi")
+tonemap_mode = 2
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_58geg"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pilib"]
+albedo_color = Color(0.329158, 0.329158, 0.329158, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_jmfbj"]
+material = SubResource("StandardMaterial3D_pilib")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fqbfa"]
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_88d5s")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_eyq2b")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -55,7 +78,7 @@ layout_mode = 2
 placeholder_text = "Enter Code"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(17.0599, 0, 0, 0, 1, 0, 0, 0, 6.34037, 0, 0, 0)
+transform = Transform3D(24.1824, 0, 0, 0, 1, 0, 0, 0, 31.0393, 0, 0.133111, 0)
 mesh = SubResource("BoxMesh_jmfbj")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
@@ -66,9 +89,6 @@ shape = SubResource("BoxShape3D_fqbfa")
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Player.tscn")
 spawn_path = NodePath("..")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.0216579, 0.999765, 0, -0.999765, 0.0216579, 0, 12.1179, 0)
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
