@@ -37,5 +37,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58898, 0)
 attributes = SubResource("CameraAttributesPractical_uaa16")
 fov = 90.0
 
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_p7tft")
