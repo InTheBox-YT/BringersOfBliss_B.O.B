@@ -14,14 +14,31 @@ radiance_size = 4
 
 [sub_resource type="Environment" id="Environment_eyq2b"]
 background_mode = 2
+background_energy_multiplier = 0.49
 sky = SubResource("Sky_jllpi")
+sky_custom_fov = 64.4
 ambient_light_source = 3
+ambient_light_energy = 0.0
+reflected_light_source = 2
 tonemap_mode = 2
+tonemap_exposure = 2.18
+tonemap_white = 2.01
 glow_enabled = true
 glow_normalized = true
+glow_intensity = 8.0
 fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+fog_light_energy = 16.0
+fog_density = 0.1059
 fog_height = 13.2
-fog_height_density = -0.3368
+fog_height_density = -1.6842
+volumetric_fog_enabled = true
+volumetric_fog_density = 1.0
+volumetric_fog_emission_energy = 141.13
+volumetric_fog_length = 74.78
+volumetric_fog_ambient_inject = 1.53
+adjustment_enabled = true
+adjustment_brightness = 0.01
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_58geg"]
 

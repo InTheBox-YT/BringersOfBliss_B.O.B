@@ -13,6 +13,8 @@ config_version=5
 config/name="HorrorGame_SHIFT"
 run/main_scene="res://world.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
+boot_splash/bg_color=Color(0.753984, 0.753984, 0.753984, 1)
+boot_splash/image="res://Texture/2_diff.png"
 config/icon="res://icon.svg"
 
 [input]
@@ -54,4 +56,5 @@ textures/canvas_textures/default_texture_filter=0
 textures/canvas_textures/default_texture_repeat=1
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.649533, 0.717846, 0.743984, 1)
+environment/defaults/default_clear_color=Color(0.138366, 0.172334, 0.185173, 1)
+anti_aliasing/quality/msaa_3d=1
