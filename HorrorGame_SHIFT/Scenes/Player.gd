@@ -10,8 +10,8 @@ extends CharacterBody3D
 # Player Variables
 var current_speed
 const CROUCH_SPEED = 1.5
-const WALK_SPEED = 5.0
-const RUN_SPEED = 7.0
+const WALK_SPEED = 3.0
+const RUN_SPEED = 5.5
 
 const lerp_speed = 10.0
 var crouching_depth = -0.5
