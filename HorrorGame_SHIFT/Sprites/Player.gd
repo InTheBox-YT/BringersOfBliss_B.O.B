@@ -30,6 +30,8 @@ func _unhandled_input(event):
 		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2) 
 	if Input.is_action_just_pressed("quit"):
 		camera.current = false
+		#WORK GOD DAMMIT
+		
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
@@ -59,5 +61,8 @@ func _physics_process(delta):
 		target_fov = zoomed_fov
 	else:
 		target_fov = normal_fov
-
+	
 	camera.fov = lerp(camera.fov, target_fov, zoom_speed * delta)
+
+func _on_back_button_pressed():
+	camera.current = true

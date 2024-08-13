@@ -11,8 +11,8 @@ var enet_peer = ENetMultiplayerPeer.new()
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("quit"):
 		pause_menu.show()
-	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		
 
 
 func _on_quit_button_pressed():
@@ -67,3 +67,5 @@ func upnp_setup():
 
 func _on_back_button_pressed():
 	pause_menu.hide()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
