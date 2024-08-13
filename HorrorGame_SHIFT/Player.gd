@@ -1,7 +1,8 @@
 extends CharacterBody3D
-
 @onready var camera = $Camera3D
 
+# Base Variables
+# I WANNA KILL MYSLEF
 const SPEED = 6.0
 const JUMP_VELOCITY = 5.0
 const GRAVITY = 25.0
