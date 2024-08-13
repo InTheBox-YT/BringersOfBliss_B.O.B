@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bdeij3mxerthy"]
 
-[ext_resource type="Script" path="res://Player.gd" id="1_feayh"]
-[ext_resource type="Shader" path="res://CellShading.gdshader" id="2_leqph"]
+[ext_resource type="Script" path="res://Sprites/Player.gd" id="1_feayh"]
+[ext_resource type="Shader" path="res://Shaders/CellShading.gdshader" id="2_leqph"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8pk3e"]
 

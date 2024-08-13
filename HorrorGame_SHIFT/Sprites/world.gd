@@ -1,18 +1,26 @@
 extends Node3D
 
 @onready var main_menu = $CanvasLayer/MainMenu
+@onready var pause_menu = $CanvasLayer/PauseMenu
 @onready var address_entry = $CanvasLayer/MainMenu/MarginContainer/VBoxContainer/AddressEntry
 
-const Player = preload("res://Player.tscn") 
+const Player = preload("res://Scenes/Player.tscn") 
 const PORT = 6969
 var enet_peer = ENetMultiplayerPeer.new()
 
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
+		pause_menu.show()
+	if event.is_action_pressed("ui_cancel"):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
+func _on_quit_button_pressed():
+	get_tree().quit()
 
 func _on_host_button_pressed():
 	main_menu.hide()
+	pause_menu.hide()
 	
 	enet_peer.create_server(PORT)
 	multiplayer.multiplayer_peer = enet_peer
