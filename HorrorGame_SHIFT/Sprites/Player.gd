@@ -3,9 +3,9 @@ extends CharacterBody3D
 
 # Base Variables
 # I WANNA KILL MYSLEF
-const WALK_SPEED = 6.0
+const WALK_SPEED = 5.0
 const RUN_SPEED = 8.0
-const CROUCH_SPEED = 3.0
+const CROUCH_SPEED = 2.0
 var STAMINA = 20
 
 const JUMP_VELOCITY = 5.0
