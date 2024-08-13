@@ -1,10 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://bh6q4ldxeoao0"]
+[gd_scene load_steps=32 format=3 uid="uid://bh6q4ldxeoao0"]
 
 [ext_resource type="Script" path="res://Sprites/world.gd" id="1_n0gi4"]
 [ext_resource type="Texture2D" uid="uid://bmv2kx5qr3lgf" path="res://Texture/Cold Night Equirect.png" id="2_o7bju"]
 [ext_resource type="Texture2D" uid="uid://dhaffl6dxvoq7" path="res://Texture/texture_03.png" id="3_nrf3h"]
 [ext_resource type="Texture2D" uid="uid://c7cwtfoa051aa" path="res://Texture/texture_10.png" id="4_hanqx"]
 [ext_resource type="Texture2D" uid="uid://dnxcjxlkl6w8n" path="res://Texture/texture_02.png" id="5_apnk0"]
+[ext_resource type="Shader" path="res://Scenes/EdgeDetection.gdshader" id="6_t4pho"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nlqik"]
 panorama = ExtResource("2_o7bju")
@@ -92,6 +93,12 @@ albedo_texture = ExtResource("5_apnk0")
 [sub_resource type="BoxMesh" id="BoxMesh_2u3gf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tio6h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_idgb5"]
+render_priority = 0
+shader = ExtResource("6_t4pho")
+shader_parameter/min_step = 0.4
+shader_parameter/max_step = 0.6
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mpm52"]
 
@@ -323,6 +330,7 @@ transform = Transform3D(0.600009, 0.394222, -0.696117, 0.418916, 0.586484, 0.693
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D4"]
 material_override = SubResource("StandardMaterial3D_ic516")
 mesh = SubResource("BoxMesh_2u3gf")
+surface_material_override/0 = SubResource("ShaderMaterial_idgb5")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D4/MeshInstance3D"]
 transform = Transform3D(0.930885, 0.298422, -0.210709, -0.257232, 0.945007, 0.201974, 0.259395, -0.133813, 0.956456, 0.421783, 0.590497, 0.697958)

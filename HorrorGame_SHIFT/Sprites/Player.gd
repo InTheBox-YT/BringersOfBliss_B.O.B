@@ -12,8 +12,8 @@ var curspeed = WALK_SPEED
 const STAMINA_MAX = 10.0
 var STAMINA = STAMINA_MAX
 
-const JUMP_VELOCITY = 5.0
-const GRAVITY = 25.0
+const JUMP_VELOCITY = 0.2
+const GRAVITY = 190.0
 
 # Zoom Variables
 var normal_fov = 70.0
