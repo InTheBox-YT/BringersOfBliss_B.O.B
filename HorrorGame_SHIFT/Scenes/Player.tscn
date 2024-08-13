@@ -16,8 +16,8 @@ shader_parameter/grime_intensity = 0.0
 shader_parameter/noise_intensity = 0.0
 shader_parameter/flicker_speed = 0.0
 shader_parameter/cel_shade_levels = 10.0
-shader_parameter/outline_thickness = 1.91
-shader_parameter/outline_color = Color(1, 1, 1, 0)
+shader_parameter/outline_thickness = 0.0
+shader_parameter/outline_color = Color(0, 0, 0, 0)
 
 [sub_resource type="CameraTexture" id="CameraTexture_ogfsb"]
 
