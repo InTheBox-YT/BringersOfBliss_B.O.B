@@ -63,3 +63,7 @@ func upnp_setup():
 	print("Success! Join Address: %s" % upnp.query_external_address())
 	
 	
+
+
+func _on_back_button_pressed():
+	pause_menu.hide()

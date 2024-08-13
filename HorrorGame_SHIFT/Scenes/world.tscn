@@ -129,13 +129,15 @@ placeholder_text = "Enter Code"
 [node name="PauseMenu" type="PanelContainer" parent="CanvasLayer"]
 visible = false
 material = SubResource("CanvasItemMaterial_58geg")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 374.0
-offset_top = 229.0
-offset_right = -374.0
-offset_bottom = -228.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.5
+offset_top = -30.5
+offset_right = 78.5
+offset_bottom = 30.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -154,6 +156,10 @@ theme_override_constants/separation = 15
 layout_mode = 2
 text = "QUIT!?!?!?!?!????
 "
+
+[node name="BackButton" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "BACK!!!!!!!!!?????????"
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("..")
@@ -206,4 +212,5 @@ skeleton = NodePath("../..")
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
