@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bdeij3mxerthy"]
 
 [ext_resource type="Script" path="res://Sprites/Player.gd" id="1_feayh"]
-[ext_resource type="Shader" path="res://Shaders/CellShading.gdshader" id="2_leqph"]
+[ext_resource type="Shader" path="res://Scenes/LethalCompany.gdshader" id="2_w6613"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8pk3e"]
 
@@ -10,14 +10,14 @@
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_uaa16"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iogff"]
-shader = ExtResource("2_leqph")
-shader_parameter/level1 = Color(0, 0, 0, 1)
-shader_parameter/level2 = Color(0.614076, 0.455256, 0.436032, 1)
-shader_parameter/level3 = Color(0.861901, 0.539179, 0.495099, 1)
-shader_parameter/level4 = Color(0.890197, 0.771877, 0.676591, 1)
-shader_parameter/threshold1 = 0.4
-shader_parameter/threshold2 = 0.52
-shader_parameter/threshold3 = 0.8
+shader = ExtResource("2_w6613")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/grime_intensity = 0.0
+shader_parameter/noise_intensity = 0.0
+shader_parameter/flicker_speed = 0.0
+shader_parameter/cel_shade_levels = 10.0
+shader_parameter/outline_thickness = 1.91
+shader_parameter/outline_color = Color(1, 1, 1, 0)
 
 [sub_resource type="CameraTexture" id="CameraTexture_ogfsb"]
 
@@ -54,8 +54,10 @@ fov = 90.0
 
 [node name="TextureRect" type="TextureRect" parent="Camera3D/CanvasLayer"]
 material = SubResource("ShaderMaterial_iogff")
-offset_right = 582.0
-offset_bottom = 655.0
+offset_left = -9.0
+offset_top = -5.0
+offset_right = 1161.0
+offset_bottom = 659.0
 texture = SubResource("CameraTexture_ogfsb")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
