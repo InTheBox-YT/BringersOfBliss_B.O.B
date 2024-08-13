@@ -28,6 +28,8 @@ func _unhandled_input(event):
 		rotate_y(-event.relative.x * .002)
 		camera.rotate_x(-event.relative.y * .002)
 		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2) 
+	if Input.is_action_just_pressed("quit"):
+		camera.current = false
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
