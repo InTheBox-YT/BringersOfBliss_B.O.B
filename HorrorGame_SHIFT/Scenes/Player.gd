@@ -71,7 +71,7 @@ func _physics_process(delta):
 		# if not crouching, allow for running
 		head.position.y = lerp(head.position.y,1.519,delta * lerp_speed)
 		if Input.is_action_pressed("Run") and is_on_floor():
-			if Stamina >= 0:
+			if Stamina >= 0 and !velocity.is_zero_approx():
 				current_speed = RUN_SPEED
 				Stamina -= delta
 			else:
