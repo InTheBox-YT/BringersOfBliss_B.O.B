@@ -3,6 +3,10 @@ extends Node3D
 @onready var main_menu = $CanvasLayer/MainMenu
 @onready var pause_menu = $CanvasLayer/PauseMenu
 @onready var address_entry = $CanvasLayer/MainMenu/MarginContainer/VBoxContainer/AddressEntry
+@onready var player = preload("res://Scenes/Player.tscn")
+
+var playerInstance = Player.instantiate()
+var shader = playerInstance.get_node("CanvasLayer/TextureRect")
 
 const Player = preload("res://Scenes/Player.tscn") 
 const PORT = 6969
@@ -12,6 +16,8 @@ func _unhandled_input(event):
 	if Input.is_action_just_pressed("quit"):
 		pause_menu.show()
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		shader.hide()
+		
 		
 
 
@@ -68,4 +74,5 @@ func upnp_setup():
 func _on_back_button_pressed():
 	pause_menu.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	shader.show()
 	

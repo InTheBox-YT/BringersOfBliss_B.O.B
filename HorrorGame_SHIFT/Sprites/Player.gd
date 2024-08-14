@@ -1,23 +1,25 @@
 extends CharacterBody3D
-@onready var camera = $Camera3D
 
-# Base Variables
-# I WANNA KILL MYSLEF
+@onready var camera = $Camera3D
+@onready var progressBar = $CanvasLayer/ProgressBar
+
+# Speed Variables
 const WALK_SPEED = 5.0
 const RUN_SPEED = 8.0
 const CROUCH_SPEED = 2.0
-var STAMINA = 20
+var curspeed = WALK_SPEED
+
+const STAMINA_MAX = 10.0
+var STAMINA = STAMINA_MAX
 
 const JUMP_VELOCITY = 5.0
 const GRAVITY = 25.0
 
-var curspeed = WALK_SPEED
+# Zoom Variables
 var normal_fov = 70.0
 var zoomed_fov = 30.0
 var zoom_speed = 5.0
 var target_fov = normal_fov
-
-
 
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
@@ -41,8 +43,6 @@ func _unhandled_input(event):
 		
 
 func _physics_process(delta):
-	print(STAMINA)
-	
 	if not is_multiplayer_authority(): return
 	
 	# Add the gravity.
@@ -61,7 +61,7 @@ func _physics_process(delta):
 		else:
 			curspeed = WALK_SPEED
 	else:
-		if STAMINA <= 20:
+		if STAMINA <= STAMINA_MAX:
 			STAMINA += delta
 		else:
 			pass
@@ -86,6 +86,7 @@ func _physics_process(delta):
 		target_fov = normal_fov
 	
 	camera.fov = lerp(camera.fov, target_fov, zoom_speed * delta)
+	progressBar.value = STAMINA
 
 func _on_back_button_pressed():
 	camera.current = true
