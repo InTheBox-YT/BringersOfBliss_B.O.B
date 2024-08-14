@@ -1,11 +1,89 @@
-extends MeshInstance3D
+extends CharacterBody3D
 
 
-# Called when the node enters the scene tree for the first time.
+const SPEED = 3.5
+const OCC_RAY_TARGET_Y_OFFSET = 0.5
+
+@export var target_player : CharacterBody3D
+
+var _occlusion_check_rays : Array[RayCast3D]
+var is_looked_at = true
+var follow_player = false
+
+@onready var occlusion_check_rays_parent = $OcclusionCheckRaysParent
+@onready var visible_on_screen_notifier = $VisibleOnScreenNotifier3D
+@onready var nav_agent = $NavigationAgent3D
+
+
 func _ready():
-	pass # Replace with function body.
+	
+	if not target_player:
+		printerr(self.name + " has no player target")
+		set_physics_process(false)
+		return
+	
+	
+	for r in occlusion_check_rays_parent.get_children():
+		if r is RayCast3D:
+			r.add_exception(self)
+			r.add_exception(target_player) 
+			_occlusion_check_rays.append(r)
+	
+	_start_following_player.call_deferred()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _start_following_player():
+	
+	await get_tree().physics_frame
+	follow_player = true
+
+
+func _physics_process(_delta):
+	if not follow_player:
+		return
+	
+	is_looked_at = _is_viewed()
+	
+	if is_looked_at:
+		return
+	
+	
+	var direction = Vector3.ZERO
+	nav_agent.target_position = target_player.global_position
+	direction = nav_agent.get_next_path_position() - global_position
+	direction.y = 0
+	direction = direction.normalized()
+	
+	
+	if nav_agent.get_current_navigation_path():
+		var where_to_look = nav_agent.get_next_path_position()
+		where_to_look.y = self.global_position.y
+		if not where_to_look.is_equal_approx(self.global_position):
+			look_at(where_to_look, Vector3.UP)
+	
+	
+	velocity = direction * SPEED
+	move_and_slide()
+
+
+func _is_viewed() -> bool:
+	var viewed = visible_on_screen_notifier.is_on_screen()
+	
+	
+	if not viewed:
+		return viewed
+	
+	var colliding_rays = 0
+	
+	
+	for r in _occlusion_check_rays:
+		r.target_position = (target_player.global_position - r.global_position) * self.basis
+		r.target_position.y += OCC_RAY_TARGET_Y_OFFSET
+		if viewed and r.is_colliding():
+			colliding_rays += 1
+	
+	
+	if colliding_rays >= _occlusion_check_rays.size():
+		viewed = false
+	
+	return viewed
