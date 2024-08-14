@@ -1,18 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://c03w8yxm0d5na"]
 
-[ext_resource type="Script" path="res://Sprites/Monster.gd" id="1_4myyl"]
+[ext_resource type="Script" path="res://Scenes/Monsterai.gd" id="1_n4gpq"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_f8v23"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_dwis8"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_07eev"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hojsk"]
 
 [node name="Node3D" type="Node3D"]
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-script = ExtResource("1_4myyl")
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+script = ExtResource("1_n4gpq")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-mesh = SubResource("CapsuleMesh_f8v23")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+mesh = SubResource("CapsuleMesh_dwis8")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-shape = SubResource("CapsuleShape3D_07eev")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_hojsk")

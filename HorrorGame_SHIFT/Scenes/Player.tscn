@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bdeij3mxerthy"]
 
 [ext_resource type="Script" path="res://Scenes/Player.gd" id="1_3eqcd"]
-[ext_resource type="Shader" path="res://Scenes/LethalCompany.gdshader" id="2_w6613"]
+[ext_resource type="Shader" path="res://Shaders/LethalCompany.gdshader" id="2_u1oow"]
 [ext_resource type="Texture2D" uid="uid://cq7772psw46v2" path="res://Sprites/Hd_White_Dot_Circle_Icon_Png_Image_With_Transparent_Background-removebg-preview.png" id="3_4d7s4"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8pk3e"]
@@ -12,10 +12,10 @@
 height = 1.2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iogff"]
-shader = ExtResource("2_w6613")
+shader = ExtResource("2_u1oow")
 shader_parameter/tint_color = Color(1, 1, 1, 1)
 shader_parameter/grime_intensity = 0.0
-shader_parameter/noise_intensity = 0.0
+shader_parameter/noise_intensity = 0.022
 shader_parameter/flicker_speed = 0.0
 shader_parameter/cel_shade_levels = 10.0
 shader_parameter/outline_thickness = 0.0
