@@ -1,9 +1,20 @@
 extends CharacterBody3D
 
+# create variables referencing objects
+@onready var head = $Head
+@onready var camera = $Head/Camera3D
+@onready var standing_collision = $StandingCollision
+@onready var crouching_collision = $CrouchingCollision
+@onready var ray_cast_3d = $RayCast3D
+
 # Player Variables
-var curSpeed
+var current_speed
+const CROUCH_SPEED = 1.5
 const WALK_SPEED = 5.0
-const RUN_SPEED = 8.0
+const RUN_SPEED = 7.0
+
+const lerp_speed = 10.0
+var crouching_depth = -0.5
 
 const MAX_STAMINA = 5.0
 var Stamina = MAX_STAMINA
@@ -26,10 +37,6 @@ const FOV_CHANGE = 1.50
 # Gravity
 var gravity = 9.8
 
-# create variables referencing objects
-@onready var head = $Head
-@onready var camera = $Head/Camera3D
-
 # Calls on First Frame
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -41,6 +48,8 @@ func _unhandled_input(event):
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-70), deg_to_rad(70))
 
 func _physics_process(delta):
+	print(Stamina)
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -49,31 +58,42 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		
-	# Handle Sprinting
-	if Input.is_action_pressed("Run") and is_on_floor():
-		Stamina -= delta;
-		if Stamina >= 0:
-			curSpeed = RUN_SPEED
+	# Handle Crouching
+	if Input.is_action_pressed("Crouch") and is_on_floor():
+		current_speed = CROUCH_SPEED
+		head.position.y = lerp(head.position.y,1.519 + crouching_depth,delta * lerp_speed)
+		standing_collision.disabled = true
+		crouching_collision.disabled = false
+	elif !ray_cast_3d.is_colliding():
+		standing_collision.disabled = false
+		crouching_collision.disabled = true
+		
+		# if not crouching, allow for running
+		head.position.y = lerp(head.position.y,1.519,delta * lerp_speed)
+		if Input.is_action_pressed("Run") and is_on_floor():
+			if Stamina >= 0:
+				current_speed = RUN_SPEED
+				Stamina -= delta
+			else:
+				current_speed = WALK_SPEED
 		else:
-			curSpeed = WALK_SPEED
-	else:
-		if Stamina <= MAX_STAMINA:
-			Stamina += delta
-		curSpeed = WALK_SPEED
+			if Stamina <= MAX_STAMINA:
+				Stamina += delta
+			current_speed = WALK_SPEED
 
 	# Movement
 	var input_dir = Input.get_vector("Left", "Right", "Up", "Down")
 	var direction = (head.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if is_on_floor():
 		if direction:
-			velocity.x = direction.x * curSpeed
-			velocity.z = direction.z * curSpeed
+			velocity.x = direction.x * current_speed
+			velocity.z = direction.z * current_speed
 		else:
 			velocity.x = 0
 			velocity.z = 0
 	else:
-		velocity.x = lerp(velocity.x, direction.x * curSpeed, delta * 2.0)
-		velocity.z = lerp(velocity.z, direction.z * curSpeed, delta * 2.0)
+		velocity.x = lerp(velocity.x, direction.x * current_speed, delta * 2.0)
+		velocity.z = lerp(velocity.z, direction.z * current_speed, delta * 2.0)
 	
 	# Head Bob
 	t_bob += delta * velocity.length() * float(is_on_floor())

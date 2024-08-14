@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdeij3mxerthy"]
+[gd_scene load_steps=8 format=3 uid="uid://bdeij3mxerthy"]
 
 [ext_resource type="Script" path="res://Scenes/Player.gd" id="1_3eqcd"]
 [ext_resource type="Shader" path="res://Scenes/LethalCompany.gdshader" id="2_w6613"]
@@ -6,6 +6,9 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8pk3e"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wx00x"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ry2on"]
+height = 1.2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iogff"]
 shader = ExtResource("2_w6613")
@@ -25,12 +28,18 @@ script = ExtResource("1_3eqcd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.999995, 0.0032114, 0, -0.0032114, 0.999995, 0, 0, 0, 1, 0, 0.994259, 0)
+visible = false
 layers = 2
 mesh = SubResource("CapsuleMesh_8pk3e")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="StandingCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_wx00x")
+
+[node name="CrouchingCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("CapsuleShape3D_ry2on")
+disabled = true
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51926, 0)
@@ -46,3 +55,6 @@ offset_top = -5.0
 offset_right = 1161.0
 offset_bottom = 659.0
 texture = SubResource("CameraTexture_ogfsb")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 2, 0)
