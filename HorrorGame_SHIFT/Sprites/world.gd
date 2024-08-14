@@ -15,7 +15,6 @@ func _unhandled_input(event):
 		pause_menu.show()
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-
 func _on_quit_button_pressed():
 	get_tree().quit()
 
@@ -35,7 +34,7 @@ func add_player(peer_id):
 
 func remove_player(peer_id):
 	var player = get_node_or_null(str(peer_id))
-	
+
 func _on_back_button_pressed():
 	pause_menu.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
