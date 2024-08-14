@@ -1,13 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdeij3mxerthy"]
+[gd_scene load_steps=7 format=3 uid="uid://bdeij3mxerthy"]
 
-[ext_resource type="Script" path="res://Sprites/Player.gd" id="1_feayh"]
+[ext_resource type="Script" path="res://Scenes/Player.gd" id="1_3eqcd"]
 [ext_resource type="Shader" path="res://Scenes/LethalCompany.gdshader" id="2_w6613"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8pk3e"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wx00x"]
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_uaa16"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iogff"]
 shader = ExtResource("2_w6613")
@@ -21,20 +19,9 @@ shader_parameter/outline_color = Color(0, 0, 0, 0)
 
 [sub_resource type="CameraTexture" id="CameraTexture_ogfsb"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_p7tft"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:rotation")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-properties/2/path = NodePath("Camera3D:rotation")
-properties/2/spawn = true
-properties/2/replication_mode = 1
-
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
-script = ExtResource("1_feayh")
+script = ExtResource("1_3eqcd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.999995, 0.0032114, 0, -0.0032114, 0.999995, 0, 0, 0, 1, 0, 0.994259, 0)
@@ -45,34 +32,17 @@ mesh = SubResource("CapsuleMesh_8pk3e")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_wx00x")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58898, 0)
-attributes = SubResource("CameraAttributesPractical_uaa16")
-fov = 90.0
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51926, 0)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
+[node name="Camera3D" type="Camera3D" parent="Head"]
 
-[node name="TextureRect" type="TextureRect" parent="Camera3D/CanvasLayer"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Head/Camera3D"]
+
+[node name="TextureRect" type="TextureRect" parent="Head/Camera3D/CanvasLayer"]
 material = SubResource("ShaderMaterial_iogff")
 offset_left = -9.0
 offset_top = -5.0
 offset_right = 1161.0
 offset_bottom = 659.0
 texture = SubResource("CameraTexture_ogfsb")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_p7tft")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
-offset_left = 12.0
-offset_top = 593.0
-offset_right = 289.0
-offset_bottom = 636.0
-rotation = -1.5708
-max_value = 10.0
-step = 0.0
-value = 10.0
-rounded = true
-show_percentage = false

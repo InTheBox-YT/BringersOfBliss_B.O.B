@@ -6,20 +6,17 @@ extends Node3D
 @onready var player = preload("res://Scenes/Player.tscn")
 
 var playerInstance = Player.instantiate()
-var shader = playerInstance.get_node("$CanvasLayer/TextureRect")
-var camera = playerInstance.get_node("$Camera3D")
+#var shader = playerInstance.get_node("$CanvasLayer/TextureRect")
+#var camera = playerInstance.get_node("$Camera3D")
 
 const Player = preload("res://Scenes/Player.tscn") 
 const PORT = 6969
 var enet_peer = ENetMultiplayerPeer.new()
 
 func _unhandled_input(event):
-	if Input.is_action_just_pressed("quit"):
+	if Input.is_action_just_pressed("Pause"):
 		pause_menu.show()
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		shader.hide()
-		
-		
 
 
 func _on_quit_button_pressed():
@@ -75,5 +72,4 @@ func upnp_setup():
 func _on_back_button_pressed():
 	pause_menu.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	shader.show()
 	
