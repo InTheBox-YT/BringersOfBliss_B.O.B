@@ -8,7 +8,8 @@ extends Node3D
 var playerInstance = Player.instantiate()
 #var shader = playerInstance.get_node("$CanvasLayer/TextureRect")
 #var camera = playerInstance.get_node("$Camera3D")
-const Player = preload("res://Scenes/Player.tscn") 
+const Player = preload("res://Scenes/Player.tscn")
+#var PlayerUI_instance = PlayerUI.instance()
 
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("Pause"):
@@ -38,4 +39,6 @@ func remove_player(peer_id):
 func _on_back_button_pressed():
 	pause_menu.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#$"%Head/Camera3D/PlayerUI".add_child(PlayerUI_instance)
+	#PlayerUI_instance.hide()
 	

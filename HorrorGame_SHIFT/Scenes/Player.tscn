@@ -47,9 +47,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51926, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Head/Camera3D"]
+[node name="PlayerUI" type="CanvasLayer" parent="Head/Camera3D"]
 
-[node name="TextureRect" type="TextureRect" parent="Head/Camera3D/CanvasLayer"]
+[node name="TextureRect" type="TextureRect" parent="Head/Camera3D/PlayerUI"]
 material = SubResource("ShaderMaterial_iogff")
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,7 +58,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CameraTexture_ogfsb")
 
-[node name="Crosshair" type="TextureRect" parent="Head/Camera3D/CanvasLayer"]
+[node name="Crosshair" type="TextureRect" parent="Head/Camera3D/PlayerUI"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
