@@ -6,7 +6,8 @@ extends Node3D
 @onready var player = preload("res://Scenes/Player.tscn")
 
 var playerInstance = Player.instantiate()
-var shader = playerInstance.get_node("CanvasLayer/TextureRect")
+var shader = playerInstance.get_node("$CanvasLayer/TextureRect")
+var camera = playerInstance.get_node("$Camera3D")
 
 const Player = preload("res://Scenes/Player.tscn") 
 const PORT = 6969
