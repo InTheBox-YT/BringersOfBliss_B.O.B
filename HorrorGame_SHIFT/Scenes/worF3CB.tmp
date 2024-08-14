@@ -1,0 +1,289 @@
+[gd_scene load_steps=30 format=3 uid="uid://bh6q4ldxeoao0"]
+
+[ext_resource type="Script" path="res://Sprites/world.gd" id="1_n0gi4"]
+[ext_resource type="Texture2D" uid="uid://bmv2kx5qr3lgf" path="res://Texture/Cold Night Equirect.png" id="2_o7bju"]
+[ext_resource type="Texture2D" uid="uid://dhaffl6dxvoq7" path="res://Texture/texture_03.png" id="3_nrf3h"]
+[ext_resource type="Texture2D" uid="uid://c7cwtfoa051aa" path="res://Texture/texture_10.png" id="4_hanqx"]
+[ext_resource type="Texture2D" uid="uid://dnxcjxlkl6w8n" path="res://Texture/texture_02.png" id="5_apnk0"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nlqik"]
+panorama = ExtResource("2_o7bju")
+
+[sub_resource type="Sky" id="Sky_jllpi"]
+sky_material = SubResource("PanoramaSkyMaterial_nlqik")
+process_mode = 1
+radiance_size = 4
+
+[sub_resource type="Environment" id="Environment_eyq2b"]
+background_mode = 2
+background_energy_multiplier = 0.49
+sky = SubResource("Sky_jllpi")
+sky_custom_fov = 64.4
+ambient_light_source = 3
+ambient_light_energy = 0.0
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_exposure = 2.18
+tonemap_white = 2.01
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 8.0
+glow_bloom = 0.5
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+fog_light_energy = 16.0
+fog_sun_scatter = 0.14
+fog_density = 0.1059
+fog_sky_affect = 0.863
+fog_height = 99.43
+fog_height_density = -3.5368
+volumetric_fog_enabled = true
+volumetric_fog_density = 1.0
+volumetric_fog_emission_energy = 141.13
+volumetric_fog_length = 74.78
+volumetric_fog_ambient_inject = 1.53
+adjustment_enabled = true
+adjustment_brightness = 0.01
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_58geg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nxh11"]
+font_size = 26
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_avanm"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8q560"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_g6hrm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_whcso"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dwedg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fqbfa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lw1pe"]
+albedo_color = Color(0.625597, 0.625597, 0.625597, 1)
+albedo_texture = ExtResource("3_nrf3h")
+metallic = 0.09
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pilib"]
+albedo_color = Color(0.329158, 0.329158, 0.329158, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jmfbj"]
+material = SubResource("StandardMaterial3D_pilib")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_t4v22"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4b54d"]
+albedo_texture = ExtResource("4_hanqx")
+
+[sub_resource type="BoxMesh" id="BoxMesh_abh7p"]
+
+[sub_resource type="Skin" id="Skin_85e66"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5x8j6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ic516"]
+albedo_texture = ExtResource("5_apnk0")
+
+[sub_resource type="BoxMesh" id="BoxMesh_2u3gf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tio6h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mpm52"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mcsiv"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_n0gi4")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_eyq2b")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.776127, -0.630222, 0.0211502, 0.449006, -0.528786, 0.720263, -0.442742, 0.568512, 0.693378, 0, 7.37572, -0.805325)
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 0.99
+shadow_transmittance_bias = -1.61
+shadow_blur = 10.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" type="PanelContainer" parent="CanvasLayer"]
+material = SubResource("CanvasItemMaterial_58geg")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 374.0
+offset_top = 229.0
+offset_right = -374.0
+offset_bottom = -228.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "B.O.B"
+label_settings = SubResource("LabelSettings_nxh11")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HostButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "PLAY!!!!!!!!!!!!!!!!!!!"
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Join"
+
+[node name="AddressEntry" type="LineEdit" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+placeholder_text = "Enter Code"
+
+[node name="PauseMenu" type="PanelContainer" parent="CanvasLayer"]
+visible = false
+material = SubResource("CanvasItemMaterial_58geg")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.5
+offset_top = -30.5
+offset_right = 78.5
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PauseMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "QUIT!?!?!?!?!????
+"
+
+[node name="BackButton" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "BACK!!!!!!!!!?????????"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.24327, 11.4437)
+light_energy = 2.293
+light_volumetric_fog_energy = 7.949
+shadow_enabled = true
+
+[node name="Short" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 2.11785, 0, 0, 0, 1, -9.63764, 2.63956, 0)
+physics_material_override = SubResource("PhysicsMaterial_avanm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Short"]
+shape = SubResource("CylinderShape3D_8q560")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Short"]
+mesh = SubResource("CylinderMesh_g6hrm")
+
+[node name="Tall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 4.4853, 0, 0, 0, 1, 2.07861, 4.19359, 10.4544)
+physics_material_override = SubResource("PhysicsMaterial_avanm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tall"]
+mesh = SubResource("CylinderMesh_g6hrm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tall"]
+shape = SubResource("CylinderShape3D_8q560")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.747937, 0.66377, 0, -0.66377, 0.747937, 0, 4.42146, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_whcso")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_dwedg")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(24.1824, 0, 0, 0, 1, 0, 0, 0, 31.0393, 0, 0.133111, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_fqbfa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_lw1pe")
+mesh = SubResource("BoxMesh_jmfbj")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(8.86586, 0, 0, 0, 1, 0, 0, 0, 15.3649, -6.75304, 0.671964, 7.38408)
+physics_material_override = SubResource("PhysicsMaterial_t4v22")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+material_override = SubResource("StandardMaterial3D_4b54d")
+mesh = SubResource("BoxMesh_abh7p")
+skin = SubResource("Skin_85e66")
+skeleton = NodePath("../../StaticBody3D2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_5x8j6")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.75304, 1.57528, 7.38408)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3"]
+material_override = SubResource("StandardMaterial3D_ic516")
+mesh = SubResource("BoxMesh_2u3gf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
+shape = SubResource("BoxShape3D_tio6h")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="."]
+transform = Transform3D(0.600009, 0.394222, -0.696117, 0.418916, 0.586484, 0.693214, 0.681542, -0.707549, 0.186749, -8.77002, 1.57528, 7.38408)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D4"]
+material_override = SubResource("StandardMaterial3D_ic516")
+mesh = SubResource("BoxMesh_2u3gf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D4"]
+shape = SubResource("BoxShape3D_tio6h")
+
+[node name="StaticBody3D5" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4.49404, -2.15853, 0.451115, 2.45625)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D5"]
+shape = SubResource("BoxShape3D_mpm52")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D5"]
+mesh = SubResource("BoxMesh_mcsiv")
+
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
