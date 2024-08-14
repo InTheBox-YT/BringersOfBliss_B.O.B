@@ -294,7 +294,6 @@ mesh = SubResource("BoxMesh_dwedg")
 transform = Transform3D(24.1824, 0, 0, 0, 1, 0, 0, 0, 31.0393, 0, 0.133111, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_fqbfa")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
@@ -366,7 +365,6 @@ mesh = SubResource("BoxMesh_mcsiv")
 transform = Transform3D(584.788, 0, 0, 0, 1, 0, 0, 0, 963.438, 0, 0.266222, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_fqbfa")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
